@@ -11,10 +11,10 @@ def create_person_list(people: list) -> list:
     result = [Person(human["name"], human["age"]) for human in people]
 
     for human in people:
-        if "wife" in human and human["wife"]:
-            Person.people[human["name"]].wife = Person.people[human["wife"]]
-        elif "husband" in human and human["husband"]:
-            Person.people[human["name"]].husband\
-                = Person.people[human["husband"]]
+        person = Person.people[human["name"]]
+        if wife_name := human.get("wife"):
+            person.wife = Person.people[wife_name]
+        elif husband_name := human.get("husband"):
+            person.husband = Person.people[husband_name]
 
     return result
